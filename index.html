@@ -10,9 +10,94 @@
 [data-theme="2"]{--bg:#0e0b10;--bg2:#14101a;--card:#1a1520;--card-h:#251e30;--text:#e8e0f0;--text2:#9e8aaa;--accent:#e879f9;--accent2:#f0abfc;--border:#2a2038;--glow:rgba(232,121,249,.15)}
 [data-theme="3"]{--bg:#0a0e0b;--bg2:#0e1610;--card:#121c14;--card-h:#1a2820;--text:#e0f0e4;--text2:#7ea88e;--accent:#34d399;--accent2:#6ee7b7;--border:#1a3028;--glow:rgba(52,211,153,.15)}
 [data-theme="4"]{--bg:#120b0b;--bg2:#1c1212;--card:#251618;--card-h:#301e20;--text:#f0e0e0;--text2:#b07e7e;--accent:#f87171;--accent2:#fca5a5;--border:#382022;--glow:rgba(248,113,113,.15)}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .3s}
+
+/* ── Animated background ── */
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;transition:color .3s}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;
+  transition:opacity 1s;
+}
+[data-theme="0"] body::before{
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(124,92,252,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(124,92,252,.08),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(60,40,160,.06),transparent),
+    linear-gradient(170deg,#0b0c10 0%,#0f1018 50%,#0b0c10 100%);
+}
+[data-theme="1"] body::before{
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 15%,rgba(14,165,233,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 15% 85%,rgba(14,165,233,.08),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(10,60,120,.06),transparent),
+    linear-gradient(170deg,#080f1a 0%,#0c1628 50%,#080f1a 100%);
+}
+[data-theme="2"] body::before{
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 70%,rgba(232,121,249,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 90% 20%,rgba(232,121,249,.08),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(120,30,100,.06),transparent),
+    linear-gradient(170deg,#0e0b10 0%,#16101c 50%,#0e0b10 100%);
+}
+[data-theme="3"] body::before{
+  background:
+    radial-gradient(ellipse 80% 60% at 80% 60%,rgba(52,211,153,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 20% 15%,rgba(52,211,153,.08),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(20,100,70,.06),transparent),
+    linear-gradient(170deg,#0a0e0b 0%,#0e1812 50%,#0a0e0b 100%);
+}
+[data-theme="4"] body::before{
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 10%,rgba(248,113,113,.12),transparent),
+    radial-gradient(ellipse 60% 50% at 30% 90%,rgba(248,113,113,.08),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(160,30,30,.06),transparent),
+    linear-gradient(170deg,#120b0b 0%,#1e1010 50%,#120b0b 100%);
+}
+
+/* ── Floating orbs ── */
+.bg-orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;animation:orbFloat 20s ease-in-out infinite}
+.orb:nth-child(1){width:500px;height:500px;animation-delay:0s;animation-duration:22s}
+.orb:nth-child(2){width:400px;height:400px;animation-delay:-5s;animation-duration:26s}
+.orb:nth-child(3){width:350px;height:350px;animation-delay:-10s;animation-duration:24s}
+.orb:nth-child(4){width:280px;height:280px;animation-delay:-15s;animation-duration:28s}
+
+[data-theme="0"] .orb:nth-child(1){background:#7c5cfc;top:10%;left:5%}
+[data-theme="0"] .orb:nth-child(2){background:#a78bfa;top:60%;right:10%}
+[data-theme="0"] .orb:nth-child(3){background:#5b3fd4;bottom:10%;left:40%}
+[data-theme="0"] .orb:nth-child(4){background:#8b6cf5;top:30%;right:40%}
+
+[data-theme="1"] .orb:nth-child(1){background:#0ea5e9;top:15%;right:8%}
+[data-theme="1"] .orb:nth-child(2){background:#38bdf8;bottom:15%;left:12%}
+[data-theme="1"] .orb:nth-child(3){background:#0369a1;top:55%;left:55%}
+[data-theme="1"] .orb:nth-child(4){background:#0284c7;top:40%;left:25%}
+
+[data-theme="2"] .orb:nth-child(1){background:#e879f9;bottom:20%;right:5%}
+[data-theme="2"] .orb:nth-child(2){background:#f0abfc;top:8%;left:15%}
+[data-theme="2"] .orb:nth-child(3){background:#c026d3;top:50%;right:35%}
+[data-theme="2"] .orb:nth-child(4){background:#d946ef;bottom:35%;left:30%}
+
+[data-theme="3"] .orb:nth-child(1){background:#34d399;top:12%;left:20%}
+[data-theme="3"] .orb:nth-child(2){background:#6ee7b7;bottom:8%;right:15%}
+[data-theme="3"] .orb:nth-child(3){background:#059669;top:55%;right:50%}
+[data-theme="3"] .orb:nth-child(4){background:#10b981;top:35%;right:25%}
+
+[data-theme="4"] .orb:nth-child(1){background:#f87171;top:8%;left:35%}
+[data-theme="4"] .orb:nth-child(2){background:#fca5a5;bottom:12%;right:20%}
+[data-theme="4"] .orb:nth-child(3){background:#dc2626;top:60%;left:8%}
+[data-theme="4"] .orb:nth-child(4){background:#ef4444;bottom:40%;right:35%}
+
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(40px,-30px) scale(1.05)}
+  50%{transform:translate(-20px,40px) scale(.95)}
+  75%{transform:translate(30px,20px) scale(1.02)}
+}
+
+body{position:relative}
+
 a{color:inherit;text-decoration:none}
 
 /* ── Navbar ── */
@@ -45,10 +130,6 @@ a{color:inherit;text-decoration:none}
 .card:hover::before{opacity:1}
 .card-name{font-weight:600;font-size:.95rem;color:var(--text)}
 .card-url{font-size:.75rem;color:var(--text2);word-break:break-all;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
-.card-badge{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.3rem}
-.badge{font-size:.6rem;padding:.15rem .45rem;border-radius:5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-.badge-trusted{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3)}
-.badge-new{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
 .card .arrow{position:absolute;bottom:.7rem;right:.7rem;width:20px;height:20px;color:var(--text2);opacity:0;transform:translateX(-4px);transition:all .2s}
 .card:hover .arrow{opacity:1;transform:translateX(0);color:var(--accent)}
 
@@ -75,14 +156,21 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
+<!-- Animated background orbs -->
+<div class="bg-orbs">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
 <div class="navbar">
   <div class="logo">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     AllHub
   </div>
   <nav class="nav-3d" id="navPills">
-    <div class="nav-pill active" data-cat="all">✦ All Sites</div>
-    <div class="nav-pill" data-cat="m">🎬 Movies &amp; Shows</div>
+    <div class="nav-pill active" data-cat="m">🎬 Movies & Shows</div>
     <div class="nav-pill" data-cat="a">🌸 Anime</div>
     <div class="nav-pill" data-cat="g">📖 Manga</div>
     <div class="nav-pill" data-cat="t">📡 Live TV &amp; Sports</div>
@@ -113,20 +201,20 @@ a{color:inherit;text-decoration:none}
 <script>
 const DATA={
 m:[
-{name:"CineZo",url:"https://cinezo.org/",t:"trusted"},
+{name:"CineZo",url:"https://cinezo.org/"},
 {name:"PantyFlix",url:"https://pantyflix.org/"},
-{name:"7Movies",url:"https://7movies.in/",t:"trusted"},
+{name:"7Movies",url:"https://7movies.in/"},
 {name:"1Tube",url:"https://www.1tube.org/"},
-{name:"1Shows",url:"https://www.1shows.org/",t:"trusted"},
-{name:"1Flex",url:"https://www.1flex.org/",t:"trusted"},
+{name:"1Shows",url:"https://www.1shows.org/"},
+{name:"1Flex",url:"https://www.1flex.org/"},
 {name:"NippleFlix",url:"https://nippleflix.org/"},
 {name:"PvrPlay",url:"https://pvrplay.online/"},
 {name:"RedFlix",url:"https://redflix.club/"},
 {name:"ShuttleTV",url:"https://shuttletv.su/"},
 {name:"FlyFlix",url:"https://flyflix.net/"},
 {name:"YouShows",url:"https://youshows.org/"},
-{name:"FlickyStream",url:"https://flickystream.mov/",t:"trusted"},
-{name:"MeowTV",url:"https://meowtv.ru/",t:"trusted"},
+{name:"FlickyStream",url:"https://flickystream.mov/"},
+{name:"MeowTV",url:"https://meowtv.ru/"},
 {name:"RiveStream",url:"https://rivestream.ru/"},
 {name:"CinemaBZ",url:"https://cinema.army/"},
 {name:"Spenflix",url:"https://spencerdevs.xyz/"},
@@ -147,7 +235,7 @@ m:[
 {name:"StreamingUnity",url:"https://streamingunity.win/"}
 ],
 a:[
-{name:"Enma",url:"https://www.enma.lol/home",t:"trusted"},
+{name:"Enma",url:"https://www.enma.lol/home"},
 {name:"Yenime",url:"https://yenime.net/"},
 {name:"AniShows",url:"https://anishows.org/home"},
 {name:"AnimeTVPlus",url:"https://animetvplus.xyz/"},
@@ -159,10 +247,10 @@ a:[
 {name:"WatchAnimeZ",url:"https://watchanimez.me/"},
 {name:"AniFlix",url:"https://aniflix.uno/"},
 {name:"AniMerulz",url:"https://animerulz.co.in/"},
-{name:"ReAnime",url:"https://reanime.to/home",t:"trusted"},
-{name:"animepahe",url:"https://animepahe.pw/",t:"trusted"},
-{name:"Anikoto",url:"https://anikototv.to",t:"trusted"},
-{name:"Miruro",url:"https://www.miruro.to",t:"trusted"},
+{name:"ReAnime",url:"https://reanime.to/home"},
+{name:"animepahe",url:"https://animepahe.pw/"},
+{name:"Anikoto",url:"https://anikototv.to"},
+{name:"Miruro",url:"https://www.miruro.to"},
 {name:"AnimeNexus",url:"https://anime.nexus/"},
 {name:"AniDB",url:"https://anidb.app/home"},
 {name:"Anikage",url:"https://anikage.cc/home"},
@@ -176,15 +264,15 @@ a:[
 {name:"Lunar",url:"https://lunarx.to/"}
 ],
 g:[
-{name:"MangaBall",url:"https://mangaball.net/",t:"trusted"},
+{name:"MangaBall",url:"https://mangaball.net/"},
 {name:"ComicK",url:"https://comick.dev/"},
 {name:"Qtoon",url:"https://qtoon.org/"},
 {name:"WeebCentral",url:"https://weebcentral.com/"},
-{name:"King of Shojo",url:"https://kingofshojo.com/",t:"new"},
+{name:"King of Shojo",url:"https://kingofshojo.com/"},
 {name:"WebToons",url:"https://www.webtoons.com/en/"},
 {name:"AniReads",url:"https://anireads.cc/"},
-{name:"Atsu",url:"https://atsu.moe/",t:"trusted"},
-{name:"Onisaga",url:"https://onisaga.com/",t:"trusted"},
+{name:"Atsu",url:"https://atsu.moe/"},
+{name:"Onisaga",url:"https://onisaga.com/"},
 {name:"Kagane",url:"https://kagane.to/"},
 {name:"AquaManga",url:"https://aquareader.org/"},
 {name:"MangaDot",url:"https://mangadot.net/"},
@@ -203,15 +291,15 @@ g:[
 {name:"Mangaxo",url:"https://mangaxo.com/home"}
 ],
 t:[
-{name:"OnDemand",url:"https://ondemand.st/",t:"trusted"},
+{name:"OnDemand",url:"https://ondemand.st/"},
 {name:"StreamEast",url:"https://thestreameast.top/"},
 {name:"STMify",url:"https://stmify.com/"},
 {name:"Famelack",url:"https://famelack.com/"},
 {name:"PublicIPTV",url:"https://publiciptv.com/"},
 {name:"SportPlus",url:"https://en97.sportplus.watch/"},
 {name:"StreamKing",url:"https://streamking.cx/"},
-{name:"DaddyLive",url:"https://dlive.sx/",t:"trusted"},
-{name:"Streamed.PK",url:"https://streamed.pk/",t:"trusted"},
+{name:"DaddyLive",url:"https://dlive.sx/"},
+{name:"Streamed.PK",url:"https://streamed.pk/"},
 {name:"Sport+",url:"https://en97.sportplus.watch/"},
 {name:"VenueVault",url:"https://venuevault.live/"},
 {name:"TheTvApp",url:"https://thetvapp.plus/"},
@@ -226,7 +314,7 @@ t:[
 };
 
 const CATEGORIES={m:"🎬 Movies & Shows",a:"🌸 Anime",g:"📖 Manga",t:"📡 Live TV & Sports"};
-let activeCat='all';
+let activeCat='m';
 let searchQuery='';
 
 function getFiltered(){
@@ -261,14 +349,8 @@ function render(){
       card.target='_blank';
       card.rel='noopener noreferrer';
       card.className='card';
-      let badges='';
-      if(item.t==='trusted') badges+='<span class="badge badge-trusted">✓ Trusted</span>';
-      if(item.t==='new') badges+='<span class="badge badge-new">✦ New</span>';
-
       const catIcon=CATEGORIES[item.cat]||'';
-
       card.innerHTML=`
-        ${badges?`<div class="card-badge">${badges}</div>`:''}
         <div class="card-name">${item.name}</div>
         <div class="card-url">${item.url}</div>
         ${catIcon?`<div style="font-size:.68rem;color:var(--text2);margin-top:auto">${catIcon}</div>`:''}
@@ -300,7 +382,6 @@ document.getElementById('searchInput').addEventListener('input',e=>{
 });
 
 // Theme
-const themes=0,themeKeys=[0,1,2,3,4];
 function cycleTheme(){
   let cur=parseInt(document.documentElement.dataset.theme)||0;
   cur=(cur+1)%5;
